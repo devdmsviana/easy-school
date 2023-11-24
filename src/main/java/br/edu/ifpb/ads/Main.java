@@ -3,6 +3,7 @@ package br.edu.ifpb.ads;
 import java.util.List;
 import java.util.Scanner;
 
+import br.edu.ifpb.ads.controller.AlunoController;
 import br.edu.ifpb.ads.dao.AlunoDAO;
 import br.edu.ifpb.ads.dao.impl.AlunoDaoImpl;
 import br.edu.ifpb.ads.model.Aluno;
@@ -15,9 +16,9 @@ public class Main {
 
    public static void main(String[] args) {
       Scanner scanner = new Scanner(System.in);
-      AlunoDAO alunoDao = new AlunoDaoImpl();
-      // Buscar um aluno pelo número de matrícula (você pode ajustar isso conforme sua lógica)
-      Aluno aluno = alunoDao.buscarAluno("201900000");
+      AlunoController alunoController = new AlunoController();
+
+      Aluno aluno = alunoController.buscarAluno("20231121");
 
       System.out.println("Deseja pagar alguma mensalidade? (s/n)");
       String resposta = scanner.nextLine();
@@ -85,6 +86,6 @@ public class Main {
          System.out.println("Todas as mensalidades foram pagas. Matrícula encerrada.");
       }
 
-      alunoDao.atualizarAluno(aluno);
+      alunoController.atualizarAluno(aluno);
    }
 }

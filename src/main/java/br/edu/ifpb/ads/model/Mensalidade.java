@@ -33,9 +33,17 @@ public class Mensalidade {
         this.valor = valor;
     }
 
+    public void setStatusPagamento(StatusPagamento statusPagamento){
+        if (LocalDate.now().isAfter(dataVencimento)){
+            this.statusPagamento = StatusPagamento.ATRASADO;
+        } else {
+            this.statusPagamento = statusPagamento;
+        }
+    }
+
     public boolean isMensalidadeAtrasada() {
         if (dataVencimento == null) {
-            return false; // ou lançar uma exceção, dependendo da lógica do seu sistema
+            return false; // ou lançar uma exceção
         }
         LocalDate dataAtual = LocalDate.now();
         return dataAtual.isAfter(dataVencimento) && statusPagamento == StatusPagamento.ATRASADO;
@@ -64,6 +72,7 @@ public class Mensalidade {
         this.valor = valorFinal;
     }
 
+
     public static List<Mensalidade> buscarMensalidadesNaoPagas(List<Mensalidade> mensalidades) {
         List<Mensalidade> mensalidadesNaoPagas = new ArrayList<>();
         for (Mensalidade mensalidade : mensalidades) {
@@ -73,4 +82,6 @@ public class Mensalidade {
         }
         return mensalidadesNaoPagas;
     }
+
+
 }

@@ -18,6 +18,7 @@ public abstract class Pessoa {
     private String email;
     private String telefone;
     private LocalDate dataNascimento;
+    private Endereco endereco;
 
 
     public Pessoa(){
