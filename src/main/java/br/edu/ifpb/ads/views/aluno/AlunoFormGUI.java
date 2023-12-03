@@ -38,7 +38,7 @@ public class AlunoFormGUI extends JFrame {
 
 	public AlunoFormGUI() {
 		initComponents();
-		setSize(getPreferredSize());
+		setSize(new Dimension(1200, 710));
 		setLocationRelativeTo(null);
 		alunoController = new AlunoController();
 	}
@@ -379,6 +379,8 @@ public class AlunoFormGUI extends JFrame {
 			}
 			alunoDTO.setTurno(turno);
 			alunoDTO.setNivel(nivel);
+			alunoDTO.setAtivo(true);
+			alunoDTO.setInadimplente(false);
 			alunoDTO.setDataMatricula(dataMatricula);
 			alunoDTO.setEmail(email);
 

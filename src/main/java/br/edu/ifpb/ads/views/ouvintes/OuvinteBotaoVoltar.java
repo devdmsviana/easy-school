@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import br.edu.ifpb.ads.views.aluno.AlunoGUI;
+
 public class OuvinteBotaoVoltar implements ActionListener {
 
 
@@ -18,8 +20,7 @@ public class OuvinteBotaoVoltar implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         janela.dispose();
-        // TODO implementar lógica de voltar pra tela anterio
-        JOptionPane.showMessageDialog(null, "Em breve irá voltar pra tela anterior", "Atenção!", JOptionPane.INFORMATION_MESSAGE);
+        new AlunoGUI().setVisible(true);
     }
     
 }
