@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
+
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import com.thoughtworks.xstream.security.AnyTypePermission;
@@ -15,6 +17,7 @@ import com.thoughtworks.xstream.security.TypePermission;
 import com.thoughtworks.xstream.security.WildcardTypePermission;
 
 import br.edu.ifpb.ads.dao.AlunoDAO;
+import br.edu.ifpb.ads.dto.AlunoDTO;
 import br.edu.ifpb.ads.exception.AlunoJaExisteException;
 import br.edu.ifpb.ads.exception.AlunoNaoEncontradoException;
 import br.edu.ifpb.ads.model.Aluno;
@@ -25,123 +28,149 @@ public class AlunoDaoImpl implements AlunoDAO {
 
     private static final String ARQUIVO_XML = "alunos.xml";
     private XStream xstream;
-
+    private List<AlunoDTO> alunos;
     private static AlunoDaoImpl instancia;
+    private ModelMapper modelMapper = new ModelMapper();
 
     private AlunoDaoImpl() {
         xstream = new XStream(new DomDriver("UTF-8"));
-        xstream.alias("aluno", Aluno.class);
+        xstream.alias("aluno", AlunoDTO.class);
 
         TypePermission allowAll = new AnyTypePermission();
-        TypePermission allowAluno = new WildcardTypePermission(new String[]{"model.Aluno"});
+        TypePermission allowAluno = new WildcardTypePermission(new String[] { "model.Aluno" });
         xstream.addPermission(allowAll);
         xstream.addPermission(allowAluno);
+
+        alunos = carregarDados();
     }
 
-    public static AlunoDaoImpl getInstancia(){
-        if (instancia == null){
+    public static AlunoDaoImpl getInstancia() {
+        if (instancia == null) {
             instancia = new AlunoDaoImpl();
         }
         return instancia;
     }
-    
+
     @SuppressWarnings("unchecked")
-    public List<Aluno> listarAlunos(){
+    public List<AlunoDTO> carregarDados() {
         try {
             FileInputStream fileInputStream = new FileInputStream(ARQUIVO_XML);
-            return (ArrayList<Aluno>) xstream.fromXML(fileInputStream);
+            return (ArrayList<AlunoDTO>) xstream.fromXML(fileInputStream);
         } catch (IOException e) {
             return new ArrayList<>();
         }
     }
 
     @Override
-    public Aluno buscarAluno(String matricula) {
-        List<Aluno> alunos = listarAlunos();
-        for (Aluno aluno : alunos){
-            if(aluno.getMatricula().equalsIgnoreCase(matricula)){
-                return aluno;
+    public List<AlunoDTO> listarAlunos() {
+        List<AlunoDTO> alunosModel = carregarDados();
+        List<AlunoDTO> alunosDTO = new ArrayList<>();
+
+        for (AlunoDTO aluno : alunosModel) {
+            AlunoDTO dto = modelMapper.map(aluno, AlunoDTO.class);
+            alunosDTO.add(dto);
+        }
+
+        return alunosDTO;
+    }
+
+    @Override
+    public AlunoDTO buscarAlunoPorMatricula(String matricula) {
+        for (AlunoDTO aluno : alunos) {
+            if (aluno.getMatricula().equalsIgnoreCase(matricula)) {
+                return modelMapper.map(aluno, AlunoDTO.class);
             }
         }
         return null;
     }
 
-
     @Override
-    public void salvarAluno(Aluno novoAluno) throws AlunoJaExisteException {
-        if (buscarAluno(novoAluno.getMatricula()) != null){
-            throw new AlunoJaExisteException("Aluno com a matrícula " + novoAluno.getMatricula() + " já existe!");
+    public void salvarAluno(AlunoDTO novoAlunoDTO) throws AlunoJaExisteException {
+        if (buscarAlunoPorMatricula(novoAlunoDTO.getMatricula()) != null) {
+            throw new AlunoJaExisteException("Aluno com a matrícula " + novoAlunoDTO.getMatricula() + " já existe!");
         }
-        
-        List<Aluno> alunos = listarAlunos();
-        alunos.add(novoAluno);
-        salvarDados(alunos);
+
+        // Convertendo DTO para Aluno
+        Aluno aluno = modelMapper.map(novoAlunoDTO, Aluno.class);
+
+        // Gerar mensalidades
+        if (aluno.getMensalidades() == null || aluno.getMensalidades().isEmpty()) {
+            List<Mensalidade> mensalidades = aluno.gerarMensalidades(aluno);
+            aluno.setMensalidades(mensalidades);
+        }
+
+        // Convertendo de volta para DTO
+        AlunoDTO alunoComMensalidadesDTO = modelMapper.map(aluno, AlunoDTO.class);
+
+        alunos.add(alunoComMensalidadesDTO);
+        salvarDados();
     }
 
-
     @Override
-    public void atualizarAluno(Aluno alunoAtualizado) throws AlunoNaoEncontradoException {
-        Aluno alunoExiste = buscarAluno(alunoAtualizado.getMatricula());
-        if (alunoExiste == null) {
-            throw new AlunoNaoEncontradoException("Aluno com a matrícula " + alunoAtualizado.getMatricula() + " não encontrado!");
+    public void atualizarAluno(String matricula, AlunoDTO alunoAtualizadoDTO) throws AlunoNaoEncontradoException {
+        AlunoDTO alunoEncontradoDTO = buscarAlunoPorMatricula(matricula);
+        if (alunoEncontradoDTO == null) {
+            throw new AlunoNaoEncontradoException("Aluno com a matrícula " + matricula + " não encontrado!");
         }
-    
-        List<Aluno> alunos = listarAlunos();
-        for (int i = 0; i < alunos.size(); i++) {
-            if (alunos.get(i).getMatricula().equalsIgnoreCase(alunoAtualizado.getMatricula())) {
-                alunos.set(i, alunoAtualizado);
-                salvarDados(alunos);
-                return;
-            }
-        }
+
+        AlunoDTO alunoEncontrado = modelMapper.map(alunoEncontradoDTO, AlunoDTO.class);
+        AlunoDTO alunoAtualizado = modelMapper.map(alunoAtualizadoDTO, AlunoDTO.class);
+        alunos.set(alunos.indexOf(alunoEncontrado), alunoAtualizado);
+        salvarDados();
     }
-
-
 
     @Override
     public void removerAluno(String matricula) throws AlunoNaoEncontradoException {
-        Aluno aluno = buscarAluno(matricula);
-        if (aluno == null) {
+        AlunoDTO alunoDTO = buscarAlunoPorMatricula(matricula);
+        if (alunoDTO == null) {
             throw new AlunoNaoEncontradoException("Aluno com matrícula " + matricula + " não encontrado.");
         }
 
-        List<Aluno> alunos = listarAlunos();
+        AlunoDTO aluno = modelMapper.map(alunoDTO, AlunoDTO.class);
         alunos.remove(aluno);
-        salvarDados(alunos);
+        salvarDados();
     }
 
-    public List<Aluno> buscarAlunosAtivos(){
-        List<Aluno> alunos = listarAlunos();
-        Iterator<Aluno> iterator = alunos.iterator();
-        while (iterator.hasNext()){
-            Aluno aluno = iterator.next();
-            if (!aluno.isAtivo()){
+    private void salvarDados() {
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream(ARQUIVO_XML);
+            xstream.toXML(alunos, fileOutputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public List<AlunoDTO> buscarAlunosAtivos() {
+        List<AlunoDTO> alunos = listarAlunos();
+        Iterator<AlunoDTO> iterator = alunos.iterator();
+        while (iterator.hasNext()) {
+            AlunoDTO aluno = iterator.next();
+            if (!aluno.isAtivo()) {
                 iterator.remove();
             }
         }
         return alunos;
     }
 
-    public List<Aluno> buscarAlunosInativos(){
-        List<Aluno> alunos = listarAlunos();
-        Iterator<Aluno> iterator = alunos.iterator();
-        while (iterator.hasNext()){
-            Aluno aluno = iterator.next();
-            if (aluno.isAtivo()){
+    public List<AlunoDTO> buscarAlunosInativos() {
+        List<AlunoDTO> alunos = listarAlunos();
+        Iterator<AlunoDTO> iterator = alunos.iterator();
+        while (iterator.hasNext()) {
+            AlunoDTO aluno = iterator.next();
+            if (aluno.isAtivo()) {
                 iterator.remove();
             }
         }
         return alunos;
     }
 
+    public List<AlunoDTO> buscarAlunosPorMensalidadeAtrasada() {
+        List<AlunoDTO> alunos = listarAlunos();
+        List<AlunoDTO> alunosComMensalidadeAtrasada = new ArrayList<>();
 
-    public List<Aluno> buscarAlunosPorMensalidadeAtrasada() {
-        List<Aluno> alunos = listarAlunos();
-        List<Aluno> alunosComMensalidadeAtrasada = new ArrayList<>();
-
-        for (Aluno aluno : alunos) {
+        for (AlunoDTO aluno : alunos) {
             for (Mensalidade mensalidade : aluno.getMensalidades()) {
-                if (mensalidade.getStatusPagamento() == StatusPagamento.ATRASADO) {
+                if (mensalidade.getStatusPagamento() == StatusPagamento.ATRASADA) {
                     alunosComMensalidadeAtrasada.add(aluno);
                     break;
                 }
@@ -151,11 +180,11 @@ public class AlunoDaoImpl implements AlunoDAO {
         return alunosComMensalidadeAtrasada;
     }
 
-    public List<Aluno> buscarAlunosPosData(LocalDate data){
-        List<Aluno> alunos = listarAlunos();
-        List<Aluno> alunosFiltroData = new ArrayList<>();
-        for (Aluno aluno : alunos){
-            if (aluno.getDataMatricula().isAfter(data)){
+    public List<AlunoDTO> buscarAlunosPosData(LocalDate data) {
+        List<AlunoDTO> alunos = listarAlunos();
+        List<AlunoDTO> alunosFiltroData = new ArrayList<>();
+        for (AlunoDTO aluno : alunos) {
+            if (aluno.getDataMatricula().isAfter(data)) {
                 alunosFiltroData.add(aluno);
             }
         }
@@ -163,18 +192,4 @@ public class AlunoDaoImpl implements AlunoDAO {
         return alunosFiltroData;
     }
 
-
-   
-
-
-    private void salvarDados(List<Aluno> alunos){
-        try {
-            FileOutputStream fileOutputStream = new FileOutputStream(ARQUIVO_XML);
-            xstream.toXML(alunos, fileOutputStream);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-   
 }

@@ -24,7 +24,7 @@ public class MainObserver {
                 Mensalidade mensalidade = mensalidades.get(j);
                 if (mensalidade.isMensalidadeAtrasada()) {
                     aluno.setInadimplente(true);
-                    mensalidade.setStatusPagamento(StatusPagamento.ATRASADO);
+                    mensalidade.setStatusPagamento(StatusPagamento.ATRASADA);
                 }
             } 
             if(aluno.isInadimplente()){

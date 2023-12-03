@@ -3,9 +3,9 @@ package br.edu.ifpb.ads.model.enums;
 public enum StatusPagamento {
     
 
-    PAGO("Pago"),
+    PAGA("Paga"),
     PENDENTE("Pendente"),
-    ATRASADO("Atrasado");
+    ATRASADA("Atrasada");
 
     private String status;
 

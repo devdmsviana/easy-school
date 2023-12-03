@@ -35,7 +35,7 @@ public class Mensalidade {
 
     public void setStatusPagamento(StatusPagamento statusPagamento){
         if (LocalDate.now().isAfter(dataVencimento)){
-            this.statusPagamento = StatusPagamento.ATRASADO;
+            this.statusPagamento = StatusPagamento.ATRASADA;
         } else {
             this.statusPagamento = statusPagamento;
         }
@@ -46,7 +46,7 @@ public class Mensalidade {
             return false; // ou lançar uma exceção
         }
         LocalDate dataAtual = LocalDate.now();
-        return dataAtual.isAfter(dataVencimento) && statusPagamento == StatusPagamento.ATRASADO;
+        return dataAtual.isAfter(dataVencimento) && statusPagamento == StatusPagamento.ATRASADA;
     }
 
     public int calcularDiasAtraso() {
@@ -68,7 +68,7 @@ public class Mensalidade {
     }
 
     public void efetuarPagamento(BigDecimal valorFinal) {
-        this.statusPagamento = StatusPagamento.PAGO;
+        this.statusPagamento = StatusPagamento.PAGA;
         this.valor = valorFinal;
     }
 

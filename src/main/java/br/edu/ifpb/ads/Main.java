@@ -4,9 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import br.edu.ifpb.ads.controller.AlunoController;
-import br.edu.ifpb.ads.dao.AlunoDAO;
-import br.edu.ifpb.ads.dao.impl.AlunoDaoImpl;
-import br.edu.ifpb.ads.model.Aluno;
+import br.edu.ifpb.ads.dto.AlunoDTO;
 import br.edu.ifpb.ads.model.Mensalidade;
 import br.edu.ifpb.ads.model.enums.StatusPagamento;
 import br.edu.ifpb.ads.payments.FormaPagamentoStrategy;
@@ -18,7 +16,7 @@ public class Main {
       Scanner scanner = new Scanner(System.in);
       AlunoController alunoController = new AlunoController();
 
-      Aluno aluno = alunoController.buscarAluno("20231121");
+      AlunoDTO aluno = alunoController.buscarAlunoPorMatricula("202315020007");
 
       System.out.println("Deseja pagar alguma mensalidade? (s/n)");
       String resposta = scanner.nextLine();
@@ -57,7 +55,7 @@ public class Main {
 
             System.out.println("Calculando pagamento da mensalidade...");
 
-            if (mensalidade.getStatusPagamento() == StatusPagamento.PENDENTE || mensalidade.getStatusPagamento() == StatusPagamento.ATRASADO) {
+            if (mensalidade.getStatusPagamento() == StatusPagamento.PENDENTE || mensalidade.getStatusPagamento() == StatusPagamento.ATRASADA) {
                mensalidade.calcularPagamento();
                System.out.println("Mensalidade paga com sucesso!");
             } else {
@@ -74,7 +72,7 @@ public class Main {
       // Verificar se todas as mensalidades estão pagas
       boolean todasPagas = true;
       for (Mensalidade m : aluno.getMensalidades()) {
-         if (m.getStatusPagamento() != StatusPagamento.PAGO) {
+         if (m.getStatusPagamento() != StatusPagamento.PAGA) {
             todasPagas = false;
             break;
          }
@@ -86,6 +84,6 @@ public class Main {
          System.out.println("Todas as mensalidades foram pagas. Matrícula encerrada.");
       }
 
-      alunoController.atualizarAluno(aluno);
+      alunoController.atualizarAluno("202315020007", aluno);
    }
 }

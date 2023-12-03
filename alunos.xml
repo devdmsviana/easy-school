@@ -1,82 +1,95 @@
 <list>
   <aluno>
-    <id>1700783085662</id>
-    <nome>Diogo</nome>
-    <email>marcello.razer@gmail.com</email>
-    <telefone>83996586204</telefone>
-    <matricula>123456</matricula>
-    <dataMatricula>2022-11-23</dataMatricula>
+    <nome>Diogo Marcelo</nome>
+    <matricula>202315020007</matricula>
+    <nomeResponsavel>Teste</nomeResponsavel>
+    <turno>Noite</turno>
+    <nivel>Avançado</nivel>
+    <dataMatricula>2023-12-03</dataMatricula>
     <mensalidades>
       <br.edu.ifpb.ads.model.Mensalidade>
-        <valor>125</valor>
-        <dataVencimento>2022-12-23</dataVencimento>
-        <statusPagamento>ATRASADO</statusPagamento>
+        <valor>128.75</valor>
+        <dataVencimento>2024-01-03</dataVencimento>
+        <statusPagamento>PAGA</statusPagamento>
+        <formaPagamentoStrategy class="br.edu.ifpb.ads.payments.PagamentoCartao"/>
       </br.edu.ifpb.ads.model.Mensalidade>
       <br.edu.ifpb.ads.model.Mensalidade>
         <valor>125</valor>
-        <dataVencimento>2023-01-23</dataVencimento>
-        <statusPagamento>ATRASADO</statusPagamento>
+        <dataVencimento>2024-02-03</dataVencimento>
+        <statusPagamento>PENDENTE</statusPagamento>
       </br.edu.ifpb.ads.model.Mensalidade>
       <br.edu.ifpb.ads.model.Mensalidade>
         <valor>125</valor>
-        <dataVencimento>2023-02-23</dataVencimento>
-        <statusPagamento>ATRASADO</statusPagamento>
+        <dataVencimento>2024-03-03</dataVencimento>
+        <statusPagamento>PENDENTE</statusPagamento>
       </br.edu.ifpb.ads.model.Mensalidade>
       <br.edu.ifpb.ads.model.Mensalidade>
         <valor>125</valor>
-        <dataVencimento>2023-03-23</dataVencimento>
-        <statusPagamento>ATRASADO</statusPagamento>
+        <dataVencimento>2024-04-03</dataVencimento>
+        <statusPagamento>PENDENTE</statusPagamento>
       </br.edu.ifpb.ads.model.Mensalidade>
       <br.edu.ifpb.ads.model.Mensalidade>
         <valor>125</valor>
-        <dataVencimento>2023-04-23</dataVencimento>
-        <statusPagamento>ATRASADO</statusPagamento>
-      </br.edu.ifpb.ads.model.Mensalidade>
-    </mensalidades>
-    <ativo>true</ativo>
-    <observadores>
-      <br.edu.ifpb.ads.email.EmailServico/>
-      <br.edu.ifpb.ads.email.EmailServico/>
-    </observadores>
-  </aluno>
-  <aluno>
-    <id>1700783085670</id>
-    <nome>Gilberto</nome>
-    <email>gil@gmail.com</email>
-    <telefone>83996586205</telefone>
-    <matricula>123456789</matricula>
-    <dataMatricula>2023-11-23</dataMatricula>
-    <mensalidades>
-      <br.edu.ifpb.ads.model.Mensalidade>
-        <valor>125</valor>
-        <dataVencimento>2023-12-23</dataVencimento>
-        <statusPagamento>ATRASADO</statusPagamento>
-      </br.edu.ifpb.ads.model.Mensalidade>
-      <br.edu.ifpb.ads.model.Mensalidade>
-        <valor>125</valor>
-        <dataVencimento>2024-01-23</dataVencimento>
-        <statusPagamento>ATRASADO</statusPagamento>
-      </br.edu.ifpb.ads.model.Mensalidade>
-      <br.edu.ifpb.ads.model.Mensalidade>
-        <valor>125</valor>
-        <dataVencimento>2024-02-23</dataVencimento>
-        <statusPagamento>ATRASADO</statusPagamento>
-      </br.edu.ifpb.ads.model.Mensalidade>
-      <br.edu.ifpb.ads.model.Mensalidade>
-        <valor>125</valor>
-        <dataVencimento>2024-03-23</dataVencimento>
-        <statusPagamento>ATRASADO</statusPagamento>
-      </br.edu.ifpb.ads.model.Mensalidade>
-      <br.edu.ifpb.ads.model.Mensalidade>
-        <valor>125</valor>
-        <dataVencimento>2024-04-23</dataVencimento>
-        <statusPagamento>ATRASADO</statusPagamento>
+        <dataVencimento>2024-05-03</dataVencimento>
+        <statusPagamento>PENDENTE</statusPagamento>
       </br.edu.ifpb.ads.model.Mensalidade>
     </mensalidades>
     <ativo>false</ativo>
-    <observadores>
-      <br.edu.ifpb.ads.email.EmailServico/>
-      <br.edu.ifpb.ads.email.EmailServico/>
-    </observadores>
+    <inadimplente>false</inadimplente>
+    <endereco>
+      <rua>Tobias Remigio Gomes</rua>
+      <bairro>Alto São Vicente</bairro>
+      <cidade>379</cidade>
+      <estado>PB</estado>
+      <cep>58500000</cep>
+      <numero>150</numero>
+    </endereco>
+  </aluno>
+  <aluno>
+    <nome>Dener Matheus</nome>
+    <email>dener@gmail.com</email>
+    <dataNascimento>1996-06-13</dataNascimento>
+    <telefone>(83) 99658-6204</telefone>
+    <matricula>2023250231</matricula>
+    <turno>Noite</turno>
+    <nivel>Avançado</nivel>
+    <dataMatricula>2023-12-03</dataMatricula>
+    <mensalidades>
+      <br.edu.ifpb.ads.model.Mensalidade>
+        <valor>125</valor>
+        <dataVencimento>2024-01-03</dataVencimento>
+        <statusPagamento>PENDENTE</statusPagamento>
+      </br.edu.ifpb.ads.model.Mensalidade>
+      <br.edu.ifpb.ads.model.Mensalidade>
+        <valor>125</valor>
+        <dataVencimento>2024-02-03</dataVencimento>
+        <statusPagamento>PENDENTE</statusPagamento>
+      </br.edu.ifpb.ads.model.Mensalidade>
+      <br.edu.ifpb.ads.model.Mensalidade>
+        <valor>125</valor>
+        <dataVencimento>2024-03-03</dataVencimento>
+        <statusPagamento>PENDENTE</statusPagamento>
+      </br.edu.ifpb.ads.model.Mensalidade>
+      <br.edu.ifpb.ads.model.Mensalidade>
+        <valor>125</valor>
+        <dataVencimento>2024-04-03</dataVencimento>
+        <statusPagamento>PENDENTE</statusPagamento>
+      </br.edu.ifpb.ads.model.Mensalidade>
+      <br.edu.ifpb.ads.model.Mensalidade>
+        <valor>125</valor>
+        <dataVencimento>2024-05-03</dataVencimento>
+        <statusPagamento>PENDENTE</statusPagamento>
+      </br.edu.ifpb.ads.model.Mensalidade>
+    </mensalidades>
+    <ativo>false</ativo>
+    <inadimplente>false</inadimplente>
+    <endereco>
+      <rua>Tobias Remigio Gomes</rua>
+      <bairro>Alto Sao Vicente</bairro>
+      <cidade>Monteiro</cidade>
+      <estado>PB</estado>
+      <cep>5850000</cep>
+      <numero>379</numero>
+    </endereco>
   </aluno>
 </list>

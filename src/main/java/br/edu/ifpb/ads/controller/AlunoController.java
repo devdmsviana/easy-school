@@ -4,34 +4,32 @@ import java.time.LocalDate;
 import java.util.List;
 
 import br.edu.ifpb.ads.dao.impl.AlunoDaoImpl;
+import br.edu.ifpb.ads.dto.AlunoDTO;
 import br.edu.ifpb.ads.exception.AlunoJaExisteException;
 import br.edu.ifpb.ads.exception.AlunoNaoEncontradoException;
-import br.edu.ifpb.ads.model.Aluno;
 
 public class AlunoController {
 
-
     private final AlunoDaoImpl alunoDao;
 
-    public AlunoController(){
+    public AlunoController() {
         alunoDao = AlunoDaoImpl.getInstancia();
     }
 
-
-    public List<Aluno> listarAlunos(){
+    public List<AlunoDTO> listarAlunos() {
         return alunoDao.listarAlunos();
     }
 
-    public Aluno buscarAluno(String matricula) throws AlunoNaoEncontradoException {
-        return alunoDao.buscarAluno(matricula);
+    public AlunoDTO buscarAlunoPorMatricula(String matricula) throws AlunoNaoEncontradoException {
+        return alunoDao.buscarAlunoPorMatricula(matricula);
     }
 
-    public void salvarAluno(Aluno aluno) throws AlunoJaExisteException{
-        alunoDao.salvarAluno(aluno);
+    public void salvarAluno(AlunoDTO alunoDTO) throws AlunoJaExisteException {
+        alunoDao.salvarAluno(alunoDTO);
     }
 
-    public void atualizarAluno(Aluno aluno) throws AlunoNaoEncontradoException {
-        alunoDao.atualizarAluno(aluno);
+    public void atualizarAluno(String matricula, AlunoDTO alunoDTO) throws AlunoNaoEncontradoException {
+        alunoDao.atualizarAluno(matricula, alunoDTO);
     }
 
     public void removerAluno(String matricula) throws AlunoNaoEncontradoException {
@@ -39,23 +37,26 @@ public class AlunoController {
     }
 
 
-    public List<Aluno> buscarAlunosInativos() {
+
+
+     public List<AlunoDTO> buscarAlunosInativos() {
         return alunoDao.buscarAlunosInativos();
     }
 
-    public List<Aluno> buscarAlunosPorMensalidadeAtrasada() {
+    public List<AlunoDTO> buscarAlunosPorMensalidadeAtrasada() {
         return alunoDao.buscarAlunosPorMensalidadeAtrasada();
     }
 
-    public List<Aluno> buscarAlunosAtivos(){
+    public List<AlunoDTO> buscarAlunosAtivos(){
         return alunoDao.buscarAlunosAtivos();
     }
 
-    public List<Aluno> buscarAlunosPosData(LocalDate data){
+    public List<AlunoDTO> buscarAlunosPosData(LocalDate data){
         return alunoDao.buscarAlunosPosData(data);
+        
     }   
 
-
+}
 
     
-}
+

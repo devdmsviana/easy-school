@@ -23,7 +23,7 @@ public class Aluno extends Pessoa {
     private String turno;
     private String nivel;
     private LocalDate dataMatricula;
-    private ArrayList<Mensalidade> mensalidades;
+    private List<Mensalidade> mensalidades;
     private boolean ativo;
     private boolean inadimplente;
 
@@ -34,7 +34,7 @@ public class Aluno extends Pessoa {
         this.ativo = true;
     }
 
-    private ArrayList<Mensalidade> gerarMensalidades(Aluno aluno){
+    public ArrayList<Mensalidade> gerarMensalidades(Aluno aluno){
         ArrayList<Mensalidade> mensalidades = new ArrayList<Mensalidade>();
         for(int i = 1; i <= 5; i++){
             LocalDate dataVencimento = dataMatricula.plusMonths(i);
@@ -68,7 +68,7 @@ public class Aluno extends Pessoa {
     // Método para atualizar o status de uma mensalidade e notificar observadores
     public void atualizarStatusMensalidade(Mensalidade mensalidade, StatusPagamento status) {
         mensalidade.setStatusPagamento(status);
-        if (status == StatusPagamento.ATRASADO) {
+        if (status == StatusPagamento.ATRASADA) {
             notificarObservadores();
         }
     }

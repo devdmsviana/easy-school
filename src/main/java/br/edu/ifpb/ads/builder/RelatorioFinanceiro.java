@@ -8,23 +8,22 @@ import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Paragraph;
-import com.itextpdf.layout.element.Table;
 
 import br.edu.ifpb.ads.controller.AlunoController;
+import com.itextpdf.layout.element.Table;
 
-public class RelatorioFinanceiroBuilder {
-
+public class RelatorioFinanceiro implements RelatorioBuilder {
     private Document document;
     private AlunoController alunoController;
 
-    public RelatorioFinanceiroBuilder(AlunoController alunoController) throws FileNotFoundException {
+    public RelatorioFinanceiro(AlunoController alunoController) throws FileNotFoundException {
         PdfWriter writer = new PdfWriter("relatorio-financeiro.pdf");
         PdfDocument pdf = new PdfDocument(writer);
         document = new Document(pdf);
         this.alunoController = alunoController;
     }
-
-    public RelatorioFinanceiroBuilder addCabecalho() {
+    @Override
+    public void addCabecalho() {
         Paragraph cabecalho = new Paragraph("Relatório Financeiro")
                 .setBold()
                 .setFontSize(20)
@@ -33,10 +32,9 @@ public class RelatorioFinanceiroBuilder {
                 .setMarginBottom(10)
                 .setMarginTop(10);
         document.add(cabecalho);
-        return this;
     }
-
-    public RelatorioFinanceiroBuilder addAluno() {
+    @Override
+    public void addAluno() {
         int alunosAtivos = alunoController.buscarAlunosAtivos().size();
         int alunosNovos = alunoController.buscarAlunosPosData(LocalDate.now()).size();
         int alunosInativos = alunoController.buscarAlunosInativos().size();
@@ -57,11 +55,10 @@ public class RelatorioFinanceiroBuilder {
 
         document.add(sumarioAluno);
         document.add(table);
-        return this;
     }
 
-
-    public RelatorioFinanceiroBuilder addFinanceiro(){
+    @Override
+    public void addFinanceiro(){
         int alunosComMensalidadeAtrasada = alunoController.buscarAlunosPorMensalidadeAtrasada().size();
         int alunosSemMensalidadeAtrasada = alunoController.buscarAlunosAtivos().size() - alunosComMensalidadeAtrasada;
 
@@ -79,7 +76,11 @@ public class RelatorioFinanceiroBuilder {
 
         document.add(sumarioFinanceiro);
         document.add(table);
-        return this;
+    }
+
+    @Override
+    public Document getResult() throws FileNotFoundException {
+        return document;
     }
 
     public void build() {
