@@ -90,16 +90,12 @@ public class AlunoDaoImpl implements AlunoDAO {
             throw new AlunoJaExisteException("Aluno com a matrícula " + novoAlunoDTO.getMatricula() + " já existe!");
         }
 
-        // Convertendo DTO para Aluno
+        
         Aluno aluno = modelMapper.map(novoAlunoDTO, Aluno.class);
-
-        // Gerar mensalidades
         if (aluno.getMensalidades() == null || aluno.getMensalidades().isEmpty()) {
             List<Mensalidade> mensalidades = aluno.gerarMensalidades(aluno);
             aluno.setMensalidades(mensalidades);
         }
-
-        // Convertendo de volta para DTO
         AlunoDTO alunoComMensalidadesDTO = modelMapper.map(aluno, AlunoDTO.class);
 
         alunos.add(alunoComMensalidadesDTO);

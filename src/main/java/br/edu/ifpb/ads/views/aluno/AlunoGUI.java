@@ -32,12 +32,13 @@ public class AlunoGUI extends JanelaPadrao {
     private JTable tabelaAlunos;
     private JScrollPane painelTabela;
     private DefaultTableModel modeloTabela;
-    private AlunoController alunoController;
     private JPanel conteudoPainel;
+
+    private AlunoController alunoController;
 
     public AlunoGUI() {
         super("Easy School - Alunos");
-        alunoController = new AlunoController();
+        this.alunoController = new AlunoController();
         setSize(1200, 700);
         setLocationRelativeTo(null);
         setResizable(true);
