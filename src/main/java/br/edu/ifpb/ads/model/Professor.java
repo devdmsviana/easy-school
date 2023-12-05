@@ -15,9 +15,9 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Professor extends Pessoa {
 
+    private String matricula;
     private BigDecimal salario;
     private String nivel;
     private boolean ativo;
-    
     
 }
