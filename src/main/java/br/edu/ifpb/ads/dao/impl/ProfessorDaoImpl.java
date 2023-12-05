@@ -1,5 +1,6 @@
 package br.edu.ifpb.ads.dao.impl;
 
+import br.edu.ifpb.ads.dao.ProfessorDAO;
 import br.edu.ifpb.ads.dto.ProfessorDTO;
 import br.edu.ifpb.ads.exception.ProfessorJaExistenteException;
 import br.edu.ifpb.ads.exception.ProfessorNaoEncontradoException;

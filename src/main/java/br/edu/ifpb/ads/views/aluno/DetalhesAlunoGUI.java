@@ -9,6 +9,7 @@ import br.edu.ifpb.ads.controller.AlunoController;
 import br.edu.ifpb.ads.dto.AlunoDTO;
 import br.edu.ifpb.ads.exception.AlunoNaoEncontradoException;
 import br.edu.ifpb.ads.utils.components.JanelaPadrao;
+import br.edu.ifpb.ads.views.mensalidade.MensalidadeGUI;
 import net.miginfocom.swing.MigLayout;
 
 public class DetalhesAlunoGUI extends JanelaPadrao {
@@ -119,6 +120,7 @@ public class DetalhesAlunoGUI extends JanelaPadrao {
         painelPagamento.add(lblTituloPagamentos, "cell 2 0");
 
         btnPagarMensalidade = new JButton("Pagar mensalidade");
+        btnPagarMensalidade.addActionListener(new OuvinteBotaoPagarMensalidade());
         painelPagamento.add(btnPagarMensalidade, "cell 2 1");
 
         btnCancelarMatricula = new JButton("Cancelar matrícula");
@@ -126,6 +128,17 @@ public class DetalhesAlunoGUI extends JanelaPadrao {
         painelPagamento.add(btnCancelarMatricula, "cell 2 2");
 
         return painelPagamento;
+    }
+
+    private class OuvinteBotaoPagarMensalidade implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            MensalidadeGUI janela = new MensalidadeGUI(alunoController, aluno, "Easy School - Pagar Mensalidade");
+            janela.setVisible(true);
+            
+        }
+        
     }
 
     private class OuvinteBotaoCancelarMatricula implements ActionListener {

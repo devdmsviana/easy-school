@@ -58,7 +58,7 @@ public class InicioGUI extends JanelaPadrao {
         JButton btnProfessores = new JButtonPadrao("Professores", 510, 155, 300, 50);
         add(btnProfessores);
 
-        JButton btnRelatorios = new JButtonPadrao("Relatórios", 510, 275, 300, 50);
+        JButton btnRelatorios = new JButtonPadrao("Relatórios", 510, 215, 300, 50);
         add(btnRelatorios);
     }
 

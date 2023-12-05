@@ -83,5 +83,8 @@ public class Mensalidade {
         return mensalidadesNaoPagas;
     }
 
+    public String toString(){
+        return "Valor: " + this.valor + ", Vencimento: " + this.dataVencimento + ", Status: " + this.statusPagamento;
+    }
 
 }

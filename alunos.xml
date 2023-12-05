@@ -1,1 +1,52 @@
-<list/>
+<list>
+  <aluno>
+    <nome>Diogo</nome>
+    <email>diogo@gmail.com</email>
+    <dataNascimento>1998-07-17</dataNascimento>
+    <telefone>(46) 57984-5646</telefone>
+    <matricula>2020224</matricula>
+    <turno>Tarde</turno>
+    <nivel>Intermediário</nivel>
+    <dataMatricula>2023-12-05</dataMatricula>
+    <mensalidades>
+      <br.edu.ifpb.ads.model.Mensalidade>
+        <valor>125</valor>
+        <dataVencimento>2024-01-05</dataVencimento>
+        <statusPagamento>PAGA</statusPagamento>
+        <formaPagamentoStrategy class="br.edu.ifpb.ads.payments.PagamentoPix"/>
+      </br.edu.ifpb.ads.model.Mensalidade>
+      <br.edu.ifpb.ads.model.Mensalidade>
+        <valor>118.75</valor>
+        <dataVencimento>2024-02-05</dataVencimento>
+        <statusPagamento>PAGA</statusPagamento>
+        <formaPagamentoStrategy class="br.edu.ifpb.ads.payments.PagamentoDinheiro"/>
+      </br.edu.ifpb.ads.model.Mensalidade>
+      <br.edu.ifpb.ads.model.Mensalidade>
+        <valor>125</valor>
+        <dataVencimento>2024-03-05</dataVencimento>
+        <statusPagamento>PENDENTE</statusPagamento>
+      </br.edu.ifpb.ads.model.Mensalidade>
+      <br.edu.ifpb.ads.model.Mensalidade>
+        <valor>125</valor>
+        <dataVencimento>2024-04-05</dataVencimento>
+        <statusPagamento>PENDENTE</statusPagamento>
+      </br.edu.ifpb.ads.model.Mensalidade>
+      <br.edu.ifpb.ads.model.Mensalidade>
+        <valor>128.75</valor>
+        <dataVencimento>2024-05-05</dataVencimento>
+        <statusPagamento>PAGA</statusPagamento>
+        <formaPagamentoStrategy class="br.edu.ifpb.ads.payments.PagamentoCartao"/>
+      </br.edu.ifpb.ads.model.Mensalidade>
+    </mensalidades>
+    <ativo>true</ativo>
+    <inadimplente>false</inadimplente>
+    <endereco>
+      <rua>Teste</rua>
+      <bairro>Teste</bairro>
+      <cidade>Teste</cidade>
+      <estado>Teste</estado>
+      <cep>45353</cep>
+      <numero>3</numero>
+    </endereco>
+  </aluno>
+</list>
