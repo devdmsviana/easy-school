@@ -4,6 +4,7 @@ import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.EmailAttachment;
 import org.apache.commons.mail.MultiPartEmail;
 
+import br.edu.ifpb.ads.dto.AlunoDTO;
 import br.edu.ifpb.ads.model.Aluno;
 import br.edu.ifpb.ads.observer.Observador;
 
@@ -43,7 +44,7 @@ public class EmailServico implements Observador {
         }
     }
 
-    public String enviarCobrancaMensalidade(Aluno aluno) throws Exception {
+    public String enviarCobrancaMensalidade(AlunoDTO aluno) throws Exception {
         MultiPartEmail email = new MultiPartEmail();
         email.setHostName("smtp.gmail.com");
         email.setSmtpPort(465);
@@ -69,7 +70,7 @@ public class EmailServico implements Observador {
     }
 
     @Override
-    public void notificar(Aluno aluno) {
+    public void notificar(AlunoDTO aluno) {
         try {
             this.enviarCobrancaMensalidade(aluno);
         } catch (Exception e) {

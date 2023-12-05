@@ -5,6 +5,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
+
+import br.edu.ifpb.ads.dto.AlunoDTO;
 import br.edu.ifpb.ads.model.enums.StatusPagamento;
 import br.edu.ifpb.ads.observer.Observador;
 import lombok.AllArgsConstructor;
@@ -60,8 +63,10 @@ public class Aluno extends Pessoa {
 
     // Método para notificar todos os observadores
     public void notificarObservadores() {
+        ModelMapper modelMapper = new ModelMapper();
         for (Observador observador : observadores) {
-            observador.notificar(this);
+            AlunoDTO aluno = modelMapper.map(this, AlunoDTO.class);
+            observador.notificar(aluno);
         }
     }
 

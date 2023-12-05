@@ -5,9 +5,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
+
+import org.modelmapper.ModelMapper;
+
 import br.edu.ifpb.ads.controller.AlunoController;
 import br.edu.ifpb.ads.dto.AlunoDTO;
+import br.edu.ifpb.ads.email.EmailServico;
 import br.edu.ifpb.ads.exception.AlunoNaoEncontradoException;
+import br.edu.ifpb.ads.model.Aluno;
+import br.edu.ifpb.ads.utils.components.JButtonPadrao;
 import br.edu.ifpb.ads.utils.components.JanelaPadrao;
 import br.edu.ifpb.ads.views.mensalidade.MensalidadeGUI;
 import net.miginfocom.swing.MigLayout;
@@ -32,8 +38,10 @@ public class DetalhesAlunoGUI extends JanelaPadrao {
     private JLabel lblTituloPagamentos;
     private JButton btnPagarMensalidade;
     private JButton btnCancelarMatricula;
+    private JButton btnTornarInadimplente;
     private AlunoDTO aluno;
     private AlunoController alunoController;
+    private ModelMapper modelMapper;
 
     public DetalhesAlunoGUI(AlunoDTO aluno, String titulo) {
         super(titulo);
@@ -119,15 +127,41 @@ public class DetalhesAlunoGUI extends JanelaPadrao {
         lblTituloPagamentos.setFont(new Font("Roboto", Font.BOLD, 14));
         painelPagamento.add(lblTituloPagamentos, "cell 2 0");
 
-        btnPagarMensalidade = new JButton("Pagar mensalidade");
+        btnPagarMensalidade = new JButtonPadrao("Pagar mensalidade");
         btnPagarMensalidade.addActionListener(new OuvinteBotaoPagarMensalidade());
         painelPagamento.add(btnPagarMensalidade, "cell 2 1");
 
-        btnCancelarMatricula = new JButton("Cancelar matrícula");
+        btnCancelarMatricula = new JButtonPadrao("Cancelar matrícula");
         btnCancelarMatricula.addActionListener(new OuvinteBotaoCancelarMatricula());
         painelPagamento.add(btnCancelarMatricula, "cell 2 2");
 
+        btnTornarInadimplente = new JButtonPadrao("Tornar inadimplente");
+        btnTornarInadimplente.addActionListener(new OuvinteBotaoTornarInadimplente());
+        painelPagamento.add(btnTornarInadimplente, "cell 2 3");
+
         return painelPagamento;
+    }
+
+    private class OuvinteBotaoTornarInadimplente implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            aluno.setInadimplente(true);
+            
+            
+                try {
+                    EmailServico emailServico = new EmailServico();
+                    emailServico.enviarCobrancaMensalidade(aluno);
+                    alunoController.atualizarAluno(aluno.getMatricula(), aluno);
+                    JOptionPane.showMessageDialog(null, "Aluno notificado via e-mail!");
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "Aluno não encontrado!");
+                } 
+                
+                dispose();
+            }
+
     }
 
     private class OuvinteBotaoPagarMensalidade implements ActionListener {
@@ -136,9 +170,9 @@ public class DetalhesAlunoGUI extends JanelaPadrao {
         public void actionPerformed(ActionEvent e) {
             MensalidadeGUI janela = new MensalidadeGUI(alunoController, aluno, "Easy School - Pagar Mensalidade");
             janela.setVisible(true);
-            
+
         }
-        
+
     }
 
     private class OuvinteBotaoCancelarMatricula implements ActionListener {
