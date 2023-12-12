@@ -22,14 +22,16 @@
         <formaPagamentoStrategy class="br.edu.ifpb.ads.payments.PagamentoDinheiro"/>
       </br.edu.ifpb.ads.model.Mensalidade>
       <br.edu.ifpb.ads.model.Mensalidade>
-        <valor>125</valor>
+        <valor>128.75</valor>
         <dataVencimento>2022-03-05</dataVencimento>
-        <statusPagamento>PENDENTE</statusPagamento>
+        <statusPagamento>PAGA</statusPagamento>
+        <formaPagamentoStrategy class="br.edu.ifpb.ads.payments.PagamentoCartao"/>
       </br.edu.ifpb.ads.model.Mensalidade>
       <br.edu.ifpb.ads.model.Mensalidade>
         <valor>125</valor>
         <dataVencimento>2024-04-05</dataVencimento>
-        <statusPagamento>PENDENTE</statusPagamento>
+        <statusPagamento>PAGA</statusPagamento>
+        <formaPagamentoStrategy class="br.edu.ifpb.ads.payments.PagamentoPix"/>
       </br.edu.ifpb.ads.model.Mensalidade>
       <br.edu.ifpb.ads.model.Mensalidade>
         <valor>128.75</valor>
@@ -39,7 +41,7 @@
       </br.edu.ifpb.ads.model.Mensalidade>
     </mensalidades>
     <ativo>true</ativo>
-    <inadimplente>true</inadimplente>
+    <inadimplente>false</inadimplente>
     <endereco>
       <rua>Teste</rua>
       <bairro>Teste</bairro>

@@ -143,25 +143,18 @@ public class DetalhesAlunoGUI extends JanelaPadrao {
     }
 
     private class OuvinteBotaoTornarInadimplente implements ActionListener {
-
         @Override
         public void actionPerformed(ActionEvent e) {
-
-            aluno.setInadimplente(true);
-            
-            
-                try {
-                    EmailServico emailServico = new EmailServico();
-                    emailServico.enviarCobrancaMensalidade(aluno);
-                    alunoController.atualizarAluno(aluno.getMatricula(), aluno);
-                    JOptionPane.showMessageDialog(null, "Aluno notificado via e-mail!");
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, "Aluno não encontrado!");
-                } 
-                
+            try {
+                aluno.setInadimplente(true);
+                alunoController.atualizarAluno(aluno.getMatricula(), aluno);
+                JOptionPane.showMessageDialog(null, "Aluno notificado via e-mail!");
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Erro ao atualizar status do aluno: " + ex.getMessage());
+            } finally {
                 dispose();
             }
-
+        }
     }
 
     private class OuvinteBotaoPagarMensalidade implements ActionListener {

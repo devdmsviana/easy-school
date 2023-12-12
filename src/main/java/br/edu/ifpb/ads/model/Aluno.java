@@ -8,6 +8,7 @@ import java.util.List;
 import org.modelmapper.ModelMapper;
 
 import br.edu.ifpb.ads.dto.AlunoDTO;
+import br.edu.ifpb.ads.email.EmailServico;
 import br.edu.ifpb.ads.model.enums.StatusPagamento;
 import br.edu.ifpb.ads.observer.Observador;
 import lombok.AllArgsConstructor;
@@ -48,38 +49,31 @@ public class Aluno extends Pessoa {
     }
 
 
-    // Lista de observadores
     private List<Observador> observadores = new ArrayList<>();
 
-    // Método para adicionar um observador
     public void adicionarObservador(Observador observador) {
         observadores.add(observador);
     }
 
-    // Método para remover um observador
     public void removerObservador(Observador observador) {
         observadores.remove(observador);
     }
 
-    // Método para notificar todos os observadores
     public void notificarObservadores() {
-        ModelMapper modelMapper = new ModelMapper();
-        for (Observador observador : observadores) {
-            AlunoDTO aluno = modelMapper.map(this, AlunoDTO.class);
-            observador.notificar(aluno);
+        if (this.isInadimplente()) {
+            ModelMapper modelMapper = new ModelMapper();
+            AlunoDTO alunoDTO = modelMapper.map(this, AlunoDTO.class);
+            for (Observador observador : observadores) {
+                observador.notificar(alunoDTO);
+            }
         }
     }
 
-    // Método para atualizar o status de uma mensalidade e notificar observadores
-    public void atualizarStatusMensalidade(Mensalidade mensalidade, StatusPagamento status) {
-        mensalidade.setStatusPagamento(status);
-        if (status == StatusPagamento.ATRASADA) {
+    public void setInadimplente(boolean inadimplente) {
+        this.inadimplente = inadimplente;
+        if (inadimplente) {
             notificarObservadores();
         }
     }
-
-
-
-
-    
 }
+

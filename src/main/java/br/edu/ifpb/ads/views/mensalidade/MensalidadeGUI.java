@@ -23,6 +23,7 @@ import br.edu.ifpb.ads.utils.components.JButtonPadrao;
 import br.edu.ifpb.ads.utils.components.JButtonVoltar;
 import br.edu.ifpb.ads.utils.components.JLabelTitulo;
 import br.edu.ifpb.ads.utils.components.JanelaPadrao;
+import br.edu.ifpb.ads.views.ouvintes.OuvinteBotaoVoltar;
 
 public class MensalidadeGUI extends JanelaPadrao {
 
@@ -38,6 +39,7 @@ public class MensalidadeGUI extends JanelaPadrao {
         super(titulo);
         this.aluno = aluno;
         this.alunoController = alunoController;
+        setLocationRelativeTo(null);
         iniciarComponentes();
         setPreferredSize(new Dimension(500, 300));
         setSize(new Dimension(500, 285));
@@ -93,6 +95,8 @@ public class MensalidadeGUI extends JanelaPadrao {
         rbPix = new JRadioButton("Pix");
         btnPagar = new JButtonPadrao("Pagar");
         btnVoltar = new JButtonVoltar();
+
+        btnVoltar.addActionListener(new OuvinteBotaoVoltar(this));
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);

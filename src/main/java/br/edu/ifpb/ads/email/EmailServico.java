@@ -14,7 +14,7 @@ public class EmailServico implements Observador {
     private static String senha = "eaxv gnrp lcpr ohft";
     private static String assunto = "Agradecemos sua inscrição";
 
-    public String enviarContrato(Aluno aluno) throws Exception {
+    public String enviarContrato(AlunoDTO aluno) throws Exception {
 
         MultiPartEmail email = new MultiPartEmail();
         email.setHostName("smtp.gmail.com");
@@ -74,7 +74,7 @@ public class EmailServico implements Observador {
         try {
             this.enviarCobrancaMensalidade(aluno);
         } catch (Exception e) {
-            e.printStackTrace(); // ou outro tratamento de erro
+            e.printStackTrace(); 
         }
     }
 }

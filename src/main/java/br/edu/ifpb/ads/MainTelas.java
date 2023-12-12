@@ -8,7 +8,7 @@ import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.fonts.roboto.FlatRobotoFont;
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 
-import br.edu.ifpb.ads.views.inicio.InicioGUI;
+import br.edu.ifpb.ads.views.LoginGUI;
 
 public class MainTelas {
     public static void main(String[] args) {
@@ -16,7 +16,7 @@ public class MainTelas {
         FlatLaf.registerCustomDefaultsSource("themes.flat");
         UIManager.put("defaultFont", new Font(FlatRobotoFont.FAMILY, Font.PLAIN, 13));
         FlatMacDarkLaf.setup();
-        new InicioGUI().setVisible(true);
+        new LoginGUI().setVisible(true);
         
 
     }
