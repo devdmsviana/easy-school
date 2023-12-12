@@ -13,23 +13,21 @@ import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.Setter;
 
+@Getter
+@Setter
 public class ProfessorDTO {
 
     public long id;
-    private String nome;
-    private String email;
-    private LocalDate dataNascimento;
-
-    private String telefone;
-
-    private String matricula;
-    private BigDecimal salario;
-
-    private String turno;
-    private LocalDate dataMatricula;
-
-    private boolean ativo;
-    private Endereco endereco;
+    public String nome;
+    public String email;
+    public LocalDate dataNascimento;
+    public String telefone;
+    public String matricula;
+    public BigDecimal salario;
+    public String turno;
+    public LocalDate dataMatricula;
+    public boolean ativo;
+    public Endereco endereco;
 
     public ProfessorDTO(String nome, String email, LocalDate dataNascimento, String telefone, String matricula,
                         BigDecimal salario, String turno, String nivel, LocalDate dataMatricula, boolean ativo,

@@ -7,23 +7,17 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
-import javax.swing.UIManager;
-
-import com.formdev.flatlaf.FlatLaf;
-import com.formdev.flatlaf.fonts.roboto.FlatRobotoFont;
-import com.formdev.flatlaf.themes.FlatMacDarkLaf;
-
+import br.edu.ifpb.ads.views.professor.ProfessorGUI;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import br.edu.ifpb.ads.model.Aluno;
 import br.edu.ifpb.ads.utils.Imagens;
 import br.edu.ifpb.ads.utils.components.JButtonPadrao;
 import br.edu.ifpb.ads.utils.components.JLabelTitulo;
 import br.edu.ifpb.ads.utils.components.JanelaPadrao;
 import br.edu.ifpb.ads.views.aluno.AlunoGUI;
 import br.edu.ifpb.ads.views.ouvintes.OuvinteBotoesTelaInicial;
+import br.edu.ifpb.ads.views.relatorio.RelatorioGUI;
 
 public class InicioGUI extends JanelaPadrao {
 
@@ -56,9 +50,11 @@ public class InicioGUI extends JanelaPadrao {
         add(btnAlunos);
 
         JButton btnProfessores = new JButtonPadrao("Professores", 510, 155, 300, 50);
+        btnProfessores.addActionListener(new OuvinteBotoesTelaInicial(new ProfessorGUI(), this));
         add(btnProfessores);
 
         JButton btnRelatorios = new JButtonPadrao("Relatórios", 510, 215, 300, 50);
+        btnRelatorios.addActionListener(new OuvinteBotoesTelaInicial(new RelatorioGUI(), this));
         add(btnRelatorios);
     }
 
@@ -91,8 +87,5 @@ public class InicioGUI extends JanelaPadrao {
             }
         });
         menu.add(itemSair);
-
     }
-
-     
 }

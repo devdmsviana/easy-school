@@ -10,14 +10,13 @@ public class MainProfessor {
 
         ProfessorDTO professor = new ProfessorDTO();
         professor.setMatricula("654646544654");
-        professor.setNome("Cleyton");
-        professor.setEmail("teste@gmail.com");
+        professor.nome = "Cleyton";
+        professor.email = "teste@gmail.com";
 
         professorController.salvarProfessor(professor);
 
         for (ProfessorDTO p : professorController.listarProfessores()){
-            System.out.println(p.getNome());
+            System.out.println(p.nome);
         }
-
     }
 }

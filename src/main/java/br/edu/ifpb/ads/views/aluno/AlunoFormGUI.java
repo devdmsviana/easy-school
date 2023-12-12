@@ -161,7 +161,7 @@ public class AlunoFormGUI extends JFrame {
 							"[]"));
 
 			// --- btnVoltar ---
-			btnVoltar.addActionListener(new OuvinteBotaoVoltar(this));
+			btnVoltar.addActionListener(new OuvinteBotaoVoltar(this, 0));
 			painelComponentes.add(btnVoltar, "cell -10 -10");
 
 			// ---- lblTituloAluno ----

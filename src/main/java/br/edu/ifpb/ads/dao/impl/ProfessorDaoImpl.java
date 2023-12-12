@@ -110,7 +110,7 @@ public class ProfessorDaoImpl implements ProfessorDAO {
             throw new ProfessorNaoEncontradoException("Professor não encontrado.");
         }
 
-        professores.remove(professor);
+        professores.remove(professor.getId());
         salvarDados();
     }
 

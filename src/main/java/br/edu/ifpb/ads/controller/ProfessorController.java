@@ -39,4 +39,9 @@ public class ProfessorController {
         return professores;
     }
 
+    public ProfessorDTO buscarProfessor(long id) {
+        Professor professor = professorDao.buscarProfessor(id);
+        ProfessorDTO professorDTO = modelMapper.map(professor, ProfessorDTO.class);
+        return professorDTO;
+    }
 }
