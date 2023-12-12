@@ -96,7 +96,7 @@ public class MensalidadeGUI extends JanelaPadrao {
         btnPagar = new JButtonPadrao("Pagar");
         btnVoltar = new JButtonVoltar();
 
-        btnVoltar.addActionListener(new OuvinteBotaoVoltar(this));
+        btnVoltar.addActionListener(new OuvinteBotaoVoltar(this, 99999));
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);

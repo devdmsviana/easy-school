@@ -7,6 +7,7 @@ import br.edu.ifpb.ads.model.Endereco;
 import br.edu.ifpb.ads.views.ouvintes.OuvinteBotaoVoltar;
 import br.edu.ifpb.ads.views.template.TemplateMethod;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.math.BigDecimal;
@@ -34,6 +35,12 @@ public class ProfessorFormGUI extends TemplateMethod {
         btnSalvar.setText("Cadastrar");
         painelComponentes.add(btnSalvar, "cell 0 30 7 1,alignx center,growx 0");
         btnSalvar.addActionListener(new ProfessorFormGUI.OuvinteBotaoCadastrar());
+    }
+
+    @Override
+    public void adicionarTitulo() {
+        lblTituloAluno.setText("Informações do Professor");
+        lblTituloAluno.setFont(new Font("Poppins", Font.BOLD, 14));
     }
 
     private class OuvinteBotaoCadastrar implements ActionListener {

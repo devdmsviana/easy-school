@@ -146,10 +146,7 @@ public class TemplateMethod extends JFrame {
 
             adicionarBotaoVoltar();
 
-
-            // ---- lblTituloAluno ----
-            lblTituloAluno.setText("Informações do Aluno");
-            lblTituloAluno.setFont(new Font("Poppins", Font.BOLD, 14));
+            adicionarTitulo();
             painelComponentes.add(lblTituloAluno, "cell 0 0");
             painelComponentes.add(separadorAluno, "cell 0 1 7 2,dock center");
 
@@ -253,6 +250,9 @@ public class TemplateMethod extends JFrame {
     }
 
     public void adicionarBotaoSalvar() {
+
+    }
+    public void adicionarTitulo() {
 
     }
 
