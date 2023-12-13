@@ -41,6 +41,7 @@ public class ProfessorFormGUI extends TemplateMethod {
     public void adicionarTitulo() {
         lblTituloAluno.setText("Informações do Professor");
         lblTituloAluno.setFont(new Font("Poppins", Font.BOLD, 14));
+        painelComponentes.add(lblTituloAluno, "cell 0 0");
     }
 
     private class OuvinteBotaoCadastrar implements ActionListener {

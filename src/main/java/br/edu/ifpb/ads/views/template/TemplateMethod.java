@@ -147,7 +147,6 @@ public class TemplateMethod extends JFrame {
             adicionarBotaoVoltar();
 
             adicionarTitulo();
-            painelComponentes.add(lblTituloAluno, "cell 0 0");
             painelComponentes.add(separadorAluno, "cell 0 1 7 2,dock center");
 
             adicionarCamposBasicos();

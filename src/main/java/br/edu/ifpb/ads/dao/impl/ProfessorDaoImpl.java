@@ -82,9 +82,13 @@ public class ProfessorDaoImpl implements ProfessorDAO {
 
     @Override
     public Professor salvarProfessor(Professor professor) throws ProfessorJaExistenteException {
-        Professor professorExistente = buscarProfessor(professor.getId());
-        if (professorExistente != null) {
-            throw new ProfessorJaExistenteException("Professor já existe!");
+        if (professor.getId() == 0) {
+            professor.setId(System.currentTimeMillis());
+        }else {
+            Professor professorExistente = buscarProfessor(professor.getId());
+            if (professorExistente != null) {
+                throw new ProfessorJaExistenteException("Professor já existe!");
+            }
         }
 
         professores.put(professor.getId(),professor);
