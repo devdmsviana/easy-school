@@ -1,0 +1,23 @@
+<map>
+  <entry>
+    <long>46464662165</long>
+    <br.edu.ifpb.ads.model.Professor>
+      <id>46464662165</id>
+      <nome>Cleyton</nome>
+      <email>teste@gmail.com</email>
+      <telefone>(65) 46545-4654</telefone>
+      <dataNascimento>2000-05-05</dataNascimento>
+      <endereco>
+        <rua>asffasf</rua>
+        <bairro>safasf</bairro>
+        <cidade>asdas</cidade>
+        <estado>sada</estado>
+        <cep>456465</cep>
+        <numero>45</numero>
+      </endereco>
+      <matricula>54645454</matricula>
+      <salario>3000</salario>
+      <ativo>true</ativo>
+    </br.edu.ifpb.ads.model.Professor>
+  </entry>
+</map>
